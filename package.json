@@ -1,0 +1,1 @@
+{"name":"@restaurant/advanced","version":"1.0.0","private":true,"type":"module","scripts":{"test":"node ../RestaurantCommon/node_modules/vitest/vitest.mjs run --config vitest.config.mjs","typecheck":"node ../RestaurantCommon/node_modules/typescript/bin/tsc --noEmit -p ../RestaurantCommon/tsconfig.json"}}
