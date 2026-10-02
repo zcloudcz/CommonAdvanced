@@ -1,24 +1,24 @@
 # CommonAdvanced
 
-Implementovaná samostatná mezivrstva mezi RestaurantCommon a RestaurantWorld. Provozní logika nemá závislost na DOM, Three.js ani konkrétním menu. Produkční kód neimportuje žádnou hru; RestaurantWorld dodává `Content` (recepty, stanice, suroviny, rozšíření a kuchyně).
+An implemented standalone intermediate layer between RestaurantCommon and RestaurantWorld. The operational logic has no dependency on the DOM, Three.js, or any specific menu. Production code does not import any game; RestaurantWorld supplies `Content` (recipes, stations, ingredients, expansions, and cuisines).
 
-- `src/inventory.ts`: obecné atomické rezervace, skládání požadavků a jednorázové uvolnění surovin. Použitelné i bez restaurace nebo nádobí.
-- `src/types.ts`: kontrakty pro datové recepty, pracovníky, objednávky, provozovny a příkazy.
-- `src/engine.ts`: první kompletní provozní model pro obsluhovanou restauraci. Obsahuje postupy přípravy, objednávky, zásobování, nádobí, personál, mzdy, rozšíření, síť poboček a validované ukládání.
+- `src/inventory.ts`: general atomic reservations, composition of requirements, and one-time release of ingredients. Usable even without a restaurant or dishes.
+- `src/types.ts`: contracts for data recipes, workers, orders, venues, and commands.
+- `src/engine.ts`: the first complete operational model for a table-service restaurant. It contains preparation workflows, orders, supply, dishes, staff, wages, expansions, a branch network, and validated saving.
 
-Jádro používá společný výběr dvou rozšíření z RestaurantCommon. Restaurace dodává vlastní menu a grafiku. Současný provozní model má role a oběh nádobí restaurace; obecný adaptér jiných typů provozoven a libovolné grafy výroby jsou další rozšíření, nikoli již hotová API.
+The core uses the shared two-expansion selection from RestaurantCommon. The restaurant supplies its own menu and graphics. The current operational model has the restaurant's roles and dish cycle; a general adapter for other types of venues and arbitrary production graphs are further extensions, not already finished APIs.
 
-Ověření: 30 jednotkových testů provozu, atomických skladových transakcí a kolizního pohybu.
+Validation: 30 unit tests of operation, atomic stock transactions, and collision movement.
 
-## Ověření a použití
+## Validation and use
 
-Z tohoto adresáře: `npm test` a `npm run typecheck`. Nástroje se používají z existujícího RestaurantCommon/node_modules, bez druhé instalace. Hratelný klient: `cd ../RestaurantWorld` a `npm run dev` (port 4176).
+From this directory: `npm test` and `npm run typecheck`. The tools are used from the existing RestaurantCommon/node_modules, without a second installation. Playable client: `cd ../RestaurantWorld` and `npm run dev` (port 4176).
 
-Stav je oddělený pro každou hru. Pobočky jedné hry mají společnou pokladnu a vlastní zásoby, personál a rozšíření. Nová pobočka začíná se základním vybavením. Obnova uložené pozice odmítá neplatné vazby objednávek, předmětů, práce a nádobí. Neaktivní pobočky používají skutečné pracovníky a konečné zásoby; offline dopočet je omezen na 120 sekund a dostupnou hotovost na mzdy. Žádné automatické bezplatné doplňování zásob.
+State is separate for each game. Branches of one game share a treasury and have their own stock, staff, and expansions. A new branch starts with basic equipment. Restoring a saved game rejects invalid links between orders, items, work, and dishes. Inactive branches use real workers and finite stock; the offline catch-up is limited to 120 seconds and the available cash for wages. No automatic free stock top-ups.
 
-Nouzový balíček surovin na splatný dluh vyžaduje výslovný příkaz hráče. Již vzniklé mzdové závazky nezmizí propuštěním personálu. Nákup zásob platí jednou a kapacita skladu započítává i rezervace a zásilku na cestě.
+The emergency ingredient package on a repayable debt requires an explicit player command. Wage obligations that have already arisen do not disappear by firing staff. A stock purchase is paid once, and the warehouse capacity counts reservations and the shipment in transit as well.
 
-[Architektonický návrh a stav implementace](ARCHITECTURE.md) · [RestaurantWorld](https://github.com/zcloudcz/RestaurantWorld)
+[Architecture design and implementation status](ARCHITECTURE.md) · [RestaurantWorld](https://github.com/zcloudcz/RestaurantWorld)
 
 
-Kolizní pohyb používá sdílený navigátor RestaurantCommon. Pevné překážky a plochy dodává obsah hry přes `Content.layout`; stanice, stoly a židle se započítávají podle vlastněných rozšíření. Klepnutí na cíl najde cestu kolem vybavení, přímé ovládání po překážce klouže. Testy ověřují všech 196 tras mezi stanovišti a stoly včetně úzkých průchodů a odchodu od hrany po ručním pohybu.
+Collision movement uses the shared RestaurantCommon navigator. Fixed obstacles and areas are supplied by the game's content via `Content.layout`; stations, tables, and chairs are counted according to the owned expansions. A tap on a target finds a path around the equipment, and direct control slides along an obstacle. The tests verify all 196 routes between stations and tables, including narrow passages and walking away from an edge after manual movement.

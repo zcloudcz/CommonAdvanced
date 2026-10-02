@@ -9,7 +9,7 @@ npm test            # tests (use content from ../RestaurantWorld)
 npm run typecheck
 ```
 
-Tooling comes from `../RestaurantCommon/node_modules`. Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), details (Czech): [docs/DETAILS.md](docs/DETAILS.md)
+Tooling comes from `../RestaurantCommon/node_modules`. Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), details: [docs/DETAILS.md](docs/DETAILS.md)
 
 ## Repository family
 
