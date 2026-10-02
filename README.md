@@ -27,3 +27,7 @@ cd RestaurantCommon && npm ci
 | [BurgerRush](https://github.com/zcloudcz/BurgerRush) · [PizzaPiazza](https://github.com/zcloudcz/PizzaPiazza) · [GasStation](https://github.com/zcloudcz/GasStation) · [RestaurantWorld](https://github.com/zcloudcz/RestaurantWorld) | games |
 
 Stack: TypeScript, Three.js, Vite, Vitest, Playwright. Requires Node.js 22.12+ and a browser with WebGL 2.
+
+## License
+
+[MIT](LICENSE) © 2026 Martin Zahálka
